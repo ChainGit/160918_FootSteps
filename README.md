@@ -1,2 +1,2 @@
 # 170101_BxdJava
-Folllow the teacher XiangDong Bi to learn Java
+The footsteps of learning Java

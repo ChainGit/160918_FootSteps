@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<title>OBJECT</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</HEAD>
+
+<BODY>
+
+<script type="text/javascript">
+//自定义对象
+function Person(){
+	console.log("1234");
+}
+
+var p = new Person();
+p.name = "zhangsan";
+p.age=29;
+p.show=function(){
+	console.log("gggggg"+p.age);
+}
+p.show();
+
+//类似Java的构建对象方法
+function Person2(name,age){
+	this.name = name;
+	this.age = age;
+	
+	this.setName = function(a){
+		this.name = a;
+	}
+	
+	this.getName = function(){
+		return this.name;
+	}
+	
+	this.setAge = function(a){
+		this.age = a;
+	}
+	
+	this.getAge = function(){
+		return this.age;
+	}
+}
+
+var p2 = new Person2("zhansan",21);
+console.log(p2.getName()+" "+p2.getAge());
+p2.setName("xiaoming");
+p2.setAge(22);
+console.log(p2.getName()+" "+p2.getAge());
+
+//键值对方式建立对象
+var p3 = {
+	"name":"xiaogang",
+	"age":23,
+	"getName":function(){
+		return this.name;
+	},
+	"setName":function(a){
+		this.name=a;
+	},
+	"getAge":function(){
+		return this.age;
+	},
+	"setAge":function(a){
+		this.age=a;
+	}
+}
+
+console.log(p3.getName()+" "+p3.getAge());
+p3.setName("xiaoming");
+p3.setAge(13);
+console.log(p3.getName()+" "+p3.getAge());
+
+var omap = {
+	8:"xiaoqiang",
+	0:"xiaogang",
+	3:"xiaofang"
+}
+
+console.log(omap[0]);
+
+var omap1 = {
+	names:["aa","bb","cc"],
+	ages:[34,12,54]
+}
+
+console.log(omap1.names[1]);
+
+var omap2 = {
+	infos:
+	[
+		{"zs":19},
+		{"ls":22}
+	],
+}
+console.log(omap2.infos);
+</script>
+
+</BODY>
+
+</HTML>

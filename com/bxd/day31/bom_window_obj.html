@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>BOM_WINDOWS_OBJ</title>
+</head>
+
+<body>
+
+<!-- BOM的对象Object、事件Event、方法Method -->
+<script type="text/javascript">
+function test1(){
+	console.log("test");
+	var name = window.navigator.appName;
+	var version = window.navigator.appVersion;
+	document.write(name+" "+version);
+}
+
+function test2(){
+	var pro = location.protocol;
+	var txt = location.href;
+	document.write(pro);
+	document.write(txt);
+	location.href="https://www.baidu.com"
+}
+
+setTimeout(document.write("hello"),4000);
+var timeid = setInterval(document.write("hello2"),3000);
+
+//clearInterval(timeid);
+
+function test3(){
+	var b = confirm("XXXXXXXXXXX");
+	console.log(b);
+	//moveBy(10,10);
+	//moveTo(10,20);
+}
+
+function test4(){
+	open("ad.html","_blank","height=300,width=300,menubar=no,toolbar=no,location=no");
+}
+
+window.onload = test4();
+window.status = "OKOKOK";
+</script>
+
+<input type="button" value="Windws obj 1" onclick="test1()">
+<input type="button" value="Windws obj 2" onclick="test2()">
+<input type="button" value="Windws obj 3" onclick="test3()">
+<input type="button" value="Windws obj 4" onclick="test4()">
+
+</body>
+</html>

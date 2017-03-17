@@ -67,3 +67,20 @@ group by name;
 # +--------+---------+
 # 2 rows in set (0.00 sec)
 
+#做法三（连接）
+select tmp.name,tmp.pinjun,sum(score<60) as guake 
+from stu 
+left join
+(select name,avg(score) as pinjun from stu group by name) as tmp
+on tmp.name = stu.name
+group by name 
+having guake > 1;
+
+# 结果：
+# +--------+---------+-------+
+# | name   | pinjun  | guake |
+# +--------+---------+-------+
+# | 张三   | 60.0000 |     2 |
+# | 李四   | 50.0000 |     2 |
+# +--------+---------+-------+
+# 2 rows in set (0.00 sec)

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript DOM HelloWorld</title>
+
+<script type="text/javascript">
+	//此时html文档还未加载完成
+	console.log(1);
+
+	//onload触发时html文档已经完全加载完毕
+	window.onload = function() {
+		console.log(3);
+		var btns = document.getElementsByTagName("button");
+		btns[0].onclick = function() {
+			console.log("hello1");
+		}
+	}
+</script>
+
+</head>
+
+<!-- 文本节点、属性节点、元素节点 -->
+<body>
+
+	<button>Click</button>
+
+	<button onclick="console.log('hello0')">Click</button>
+
+	<script type="text/javascript">
+		//此时html文档加载完成，但是一般也不将js放在文本末尾
+		console.log(2);
+	</script>
+
+</body>
+</html>

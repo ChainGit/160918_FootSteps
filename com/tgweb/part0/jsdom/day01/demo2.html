@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO ONE</title>
+
+<script type="text/javascript">
+	//读写节点的方式
+	window.onload = function() {
+		var inputName = document.getElementById("name");
+		console.log(inputName.value);
+		inputName.value = "TEST";
+	}
+</script>
+
+</head>
+<body>
+
+	<span>您的姓名</span>
+	<input type="text" id="name" value="姓名" />
+
+	<br />
+
+	<span>您的性别</span>
+	<input type="radio" name="sex" />男
+	<input type="radio" name="sex" />女
+
+	<p>你喜欢哪个城市</p>
+	<ul id="city">
+		<li>北京</li>
+		<li>上海</li>
+		<li>南京</li>
+		<li>广州</li>
+	</ul>
+
+	<p>你喜欢哪个水果</p>
+	<ul>
+		<li>苹果</li>
+		<li>梨子</li>
+		<li>香蕉</li>
+		<li>橘子</li>
+	</ul>
+
+</body>
+</html>

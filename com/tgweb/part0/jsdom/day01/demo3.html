@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO ONE</title>
+
+<script type="text/javascript">
+	//获取节点的子节点
+	window.onload = function() {
+		var ulCity = document.getElementById("city");
+		console.log(ulCity);
+		console.log(ulCity.childNodes);
+		console.log(ulCity.getElementsByTagName("li"));
+		console.log(ulCity.firstChild);
+		console.log(ulCity.lastChild);
+
+		console.log(ulCity.firstChild.nodeValue);
+		ulCity.firstChild.nodeValue = "武汉";
+		ulCity.childNodes[1].innerText = "西安";
+		ulCity.childNodes[2].nodeValue = "重庆";
+	}
+</script>
+
+</head>
+<body>
+
+	<span>您的姓名</span>
+	<input type="text" id="name" value="姓名" />
+
+	<br />
+
+	<span>您的性别</span>
+	<input type="radio" name="sex" />男
+	<input type="radio" name="sex" />女
+
+	<p>你喜欢哪个城市</p>
+	<ul id="city">
+		<li>北京</li>
+		<li>上海</li>
+		<li>南京</li>
+		<li>广州</li>
+	</ul>
+
+	<p>你喜欢哪个水果</p>
+	<ul>
+		<li>苹果</li>
+		<li>梨子</li>
+		<li>香蕉</li>
+		<li>橘子</li>
+	</ul>
+
+</body>
+</html>

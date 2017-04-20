@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	//练习
+	$(function() {
+		var $data = $("#data tbody");
+
+		var name = [ "小红", "小刚", "小明", "小芳" ];
+
+		$("#addOne").click(
+				function() {
+					$("<tr></tr>").append("<td>" + getIntRand(2, 10) + "</td>")
+							.append(
+									"<td>" + name[getIntRand(0, name.length)]
+											+ "</td>").append(
+									"<td>" + getIntRand(20, 30) + "</td>")
+							.append("<td>" + getIntRand(3000, 5000) + "</td>")
+							.append("<td><a href=\"#\">删除</a></td>").appendTo(
+									$data).find("a").click(function() {
+								$(this).parent().parent().remove();
+								return false;
+							});
+				});
+
+		$("#deleteAll").click(function() {
+			$data.empty();
+		});
+
+		function getIntRand(s, e) {
+			//[0,1)			
+			return parseInt(Math.random() * (e - s) + s);
+		}
+
+	})
+</script>
+</head>
+<body>
+
+	<button id="addOne">增加一条数据</button>
+	<button id="deleteAll">清空所有数据</button>
+
+	<hr />
+
+	<table id="data" border="1" cellspacing="0" cellpadding="10">
+		<tr>
+			<th>序号</th>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>薪水</th>
+			<th>操作</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>小明</td>
+			<td>20</td>
+			<td>1234</td>
+			<td><a href="#">删除</a></td>
+		</tr>
+	</table>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div, span, p {
+	width: 140px;
+	height: 140px;
+	margin: 5px;
+	background: #aaa;
+	border: #000 1px solid;
+	float: left;
+	font-size: 17px;
+	font-family: Verdana;
+}
+
+div.mini {
+	width: 55px;
+	height: 55px;
+	background-color: #aaa;
+	font-size: 12px;
+}
+
+div.hide {
+	display: none;
+}
+</style>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		function anmateIt() {
+			$("#mover").slideToggle("slow", anmateIt);
+		}
+
+		anmateIt();
+	});
+
+	//可见性过滤选择器(:)练习
+	$(function() {
+		var color = "#ffbbaa";
+
+		$("#btn1").click(function() {
+			console.log(this.id);
+			$("div:visible").css("background", color);
+		});
+
+		$("#btn2").click(function() {
+			console.log(this.id);
+			//show方法单位是秒
+			//jquery方法返回的是原来的对象，不是新的对象
+			$("div:hidden").show(2000).css("background", color);
+		});
+
+		$("#btn3").click(function() {
+			console.log(this.id);
+			console.log($("input:hidden").attr("value"));
+			console.log($("input:hidden").val());
+		});
+
+	})
+</script>
+</head>
+<body>
+
+	<button id="btn1">选择可见div元素</button>
+	<button id="btn2">选择不可见div元素</button>
+	<button id="btn3">获取input的type为hidden的值</button>
+
+
+	<br />
+	<hr />
+	<br />
+
+	<h2>过滤选择器</h2>
+
+	<div class="one" id="one">
+		id为one,class为one的div
+		<div class="mini">class为mini的div</div>
+	</div>
+
+	<div class="one" id="two" title="test">
+		id为two,class为one,title为test的div
+		<div class="mini" title="other">class为mini,title为other的div</div>
+		<div class="mini hide" title="test">class为mini,title为test的div</div>
+	</div>
+
+	<div class="one">
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini"></div>
+	</div>
+
+	<div class="one">
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini" title="test">class为mini,title为test的div</div>
+	</div>
+
+	<div class="two" style="display: none">
+		<input type="hidden" value="TEST" /> 包含input的type为hidden的div
+	</div>
+
+	<span class="two">span元素1 </span>
+	<span class="two" class="hide">span元素2 </span>
+
+	<span class="two" id="mover">span元素3 动画 </span>
+
+</body>
+</html>

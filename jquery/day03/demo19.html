@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+@charset "utf-8";
+
+.span1 {
+	color: red;
+}
+
+.span2 {
+	color: blue;
+}
+</style>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		console.log($("#s").hasClass("span1"));
+		console.log($("#s").hasClass("span2"));
+
+		console.log($("#s").removeClass("span1"));
+
+		console.log($("#s").addClass("span2"));
+
+		$("#s").click(function() {
+			$("#s").toggleClass("span2");
+		});
+
+		$("#s").css("opacity", 0.5);
+		console.log($("#s").width());
+		console.log($("#s").height());
+
+		console.log($("#s").offset().top);
+		console.log($("#s").offset().left);
+	})
+</script>
+</head>
+
+<body>
+	<span id="s" class="span1">XXXXXYYYYYZZZZZ</span>
+</body>
+</html>

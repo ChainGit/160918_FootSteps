@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+	<named-config name="test">
+		<property name="driverClass">com.mysql.jdbc.Driver</property>
+		<property name="jdbcUrl">jdbc:mysql://192.168.56.2:3306/test</property>
+		<property name="user">chain</property>
+		<property name="password">0702</property>
+		<property name="acquireIncrement">5</property>
+		<property name="initialPoolSize">6</property>
+		<property name="minPoolSize">5</property>
+		<property name="maxPoolSize">10</property>
+	</named-config>
+</c3p0-config>
+

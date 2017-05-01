@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../base/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		update();
+
+		$("a").click(function() {
+			afun(this);
+			return false;
+		});
+
+		function afun(obj) {
+			var url = obj.href;
+			var args = {
+				"time" : new Date().getTime()
+			};
+
+			$.post(url, args, function(data) {
+				var p = eval("(" + data + ")");
+				var msg = p.msg;
+				if (msg == 1)
+					$("#msg").text("操作成功");
+				else
+					$("#msg").text("操作失败");
+			});
+
+			update();
+
+			return false;
+		}
+
+		function update() {
+			return false;
+		}
+	})
+</script>
+</head>
+<body>
+
+	<h2>图书购物</h2>
+
+	<span id="msg"></span>
+	<br />
+
+	<span>书籍1</span>
+	<a href="/161027_TgWebBasic/addBook?id=book1">添加一本</a>
+	<br />
+	<span>书籍2</span>
+	<a href="/161027_TgWebBasic/addBook?id=book2">添加一本</a>
+	<br />
+	<span>书籍3</span>
+	<a href="/161027_TgWebBasic/addBook?id=book3">添加一本</a>
+	<br />
+
+	<hr />
+
+	<span>购物车</span>
+	<div id="cart"></div>
+
+</body>
+</html>

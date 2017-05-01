@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../../base/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("a").click(function() {
+			//var url = this.href;
+			//加上选择器
+			var url = this.href + " font:first";
+			var args = {
+				"time" : new Date().getTime()
+			};
+
+			//GET
+			//$("#content").load(url);
+			//POST
+			$("#content").load(url, args);
+
+			return false;
+		});
+	})
+</script>
+</head>
+<body>
+
+	<div>
+		<a href="../day01/tom.html">TOM</a> <br /> <a
+			href="../day01/jack.html">JACK</a> <br /> <a
+			href="../day01/max.html">MAX</a> <br />
+	</div>
+
+	<div id="content"></div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	var jsonObject = {
+		"name" : "test",
+		"age" : 20,
+		"address" : {
+			"country" : "china",
+			"city" : "beijing"
+		},
+		"method" : function() {
+			console.log("method");
+		}
+	};
+
+	var jsonStr = "{'name':'jack','age':21}";
+
+	var jsonNew = eval("(" + jsonStr + ")");
+
+	window.onload = function() {
+		console.log(jsonObject.name);
+		console.log(jsonObject.age);
+		console.log(jsonObject.address.city);
+		jsonObject.method();
+
+		var str = "console.log('hehe')";
+		eval("(" + str + ")");
+
+		console.log(jsonNew.name);
+		console.log(jsonNew.age);
+
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>

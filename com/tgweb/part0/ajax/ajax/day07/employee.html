@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>员工信息显示</title>
+<link rel="stylesheet" href="../../base/layui/css/layui.css">
+<link rel="stylesheet" href="../../base/layui/global.css">
+<style type="text/css">
+.div-center {
+	width: 95%;
+	text-align: center;
+	margin: 0 auto
+}
+</style>
+<script type="text/javascript" src="../../base/layui/layui.js"></script>
+<script type="text/javascript" src="../../base/jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	var form = null;
+
+	$(function() {
+
+		layui.use([ 'form', 'layer' ], function() {
+			form = layui.form();
+			form.on("select", function(data) {
+				switch (data.elem.id) {
+				case "city":
+					$("#depart").empty().append(
+							$("<option></option>").val("").text("请选择"));
+				case "depart":
+					$("#employ").empty().append(
+							$("<option></option>").val("").text("请选择"));
+				case "employ":
+					$("#tbody").empty();
+				}
+
+				switch (data.elem.id) {
+				case "city":
+					getInfo($("#depart"), data.value);
+					break;
+				case "depart":
+					getInfo($("#employ"), data.value);
+					break;
+				case "employ":
+					getInfo($("#tbody"), data.value);
+					break;
+				}
+
+			});
+		});
+
+		getInfo($("#city"), -1);
+
+		function getInfo(obj, id) {
+			var $obj = obj;
+			var method = $obj.attr("id");
+			if (method == "tbody")
+				method = "single";
+			var url = "/161027_TgWebBasic/get.do";
+			var args = {
+				"time" : new Date().getTime(),
+				"method" : method,
+				"id" : id
+			};
+
+			$.post(url, args, function(data) {
+				var res = eval("(" + data + ")");
+				if (method != "single")
+					setOptions(obj, res);
+				else
+					setTable(res);
+
+				if (method == "employ")
+					setTable(res);
+			});
+		}
+
+		function setTable(json) {
+			if (json == null)
+				return;
+
+			$("#tbody").empty();
+
+			if (json instanceof Array)
+				for (var p = 0; p < json.length; p++)
+					$("#tbody").append(
+							$("<tr></tr>").append(
+									$("<td></td>").text(json[p].id)).append(
+									$("<td></td>").text(json[p].name)).append(
+									$("<td></td>").text(json[p].eid)));
+			else
+				$("#tbody").append(
+						$("<tr></tr>").append($("<td></td>").text(json.id))
+								.append($("<td></td>").text(json.name)).append(
+										$("<td></td>").text(json.eid)));
+		}
+
+		function setOptions(obj, json) {
+			if (json == null)
+				return;
+
+			var $obj = obj;
+			$obj.empty().append($("<option></option>").val("").text("请选择"));
+
+			for (var p = 0; p < json.length; p++)
+				$obj.append($("<option></option>").val(json[p].id).text(
+						json[p].name));
+
+			if (form != null)
+				form.render('select');
+		}
+	})
+</script>
+</head>
+<body>
+
+	<div class="site-title">
+		<fieldset>
+			<legend>
+				<a>员工信息显示</a>
+			</legend>
+		</fieldset>
+	</div>
+
+	<div class="layui-form div-center">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<div class="layui-inline">
+					<label class="layui-form-label">城市：</label>
+				</div>
+				<div class="layui-inline">
+					<select id="city" lay-verify="required">
+						<option value="">请选择</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<div class="layui-inline">
+					<label class="layui-form-label">部门：</label>
+				</div>
+				<div class="layui-inline">
+					<select id="depart" lay-verify="required">
+						<option value="">请选择</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<div class="layui-inline">
+					<label class="layui-form-label">员工：</label>
+				</div>
+				<div class="layui-inline">
+					<select id="employ" lay-verify="required">
+						<option value="">请选择</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="div-center">
+		<table id="table" class="layui-table" lay-even lay-skin="nob">
+			<colgroup>
+				<col width="33%">
+				<col width="33%">
+				<col>
+			</colgroup>
+			<thead>
+				<tr>
+					<th>员工ID</th>
+					<th>员工名称</th>
+					<th>员工部门ID</th>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function() {
+		var cnt = document.getElementById("content");
+		var as = document.getElementsByTagName("a");
+		for (var i = 0; i < as.length; i++)
+			as[i].onclick = function() {
+				var req = new XMLHttpRequest();
+				var url = this.href;
+				var method = "GET";
+
+				req.open(method, url);
+
+				req.send(null);
+
+				req.onreadystatechange = function() {
+					if (req.readyState == 4)
+						if (req.status == 200 || req.status == 304)
+							processResopnseXML(req.responseXML);
+				}
+
+				return false;
+			}
+
+		function processResopnseXML(respXML) {
+			var rootNode = respXML.getElementsByTagName("details")[0];
+			var name = rootNode.getElementsByTagName("name")[0];
+			var email = rootNode.getElementsByTagName("email")[0];
+
+			var spanName = document.createElement("span");
+			spanName.innerText = name.firstChild.nodeValue;
+			var aEmail = document.createElement("a");
+			aEmail.href = "#";
+			aEmail.innerText = email.firstChild.nodeValue;
+
+			cnt.innerHTML = "";
+			cnt.appendChild(spanName);
+			cnt.appendChild(aEmail);
+		}
+
+	}
+</script>
+</head>
+<body>
+
+	<div>
+		<a href="tom.xml">TOM</a><br /> <a href="max.xml">MAX</a><br /> <a
+			href="jack.xml">JACK</a><br />
+	</div>
+
+	<div id="content"></div>
+</body>
+</html>

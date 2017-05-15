@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="tg-struts2-b" extends="struts-default">
+		<!-- 简单配置 -->
+		<!-- <action name="input.day02"> <result>/WEB-INF/pages/day02/input.jsp</result> 
+			</action> -->
+
+		<!-- 默认配置 -->
+		<action name="input.day02" class="com.opensymphony.xwork2.ActionSupport"
+			method="execute">
+			<result name="success" type="dispatcher">/WEB-INF/pages/day02/input.jsp
+			</result>
+		</action>
+
+		<action name="show.day02" class="com.tgweb.struts2.day02.Good"
+			method="save">
+			<result name="details">/WEB-INF/pages/day02/show.jsp</result>
+		</action>
+
+		<action name="context.day02" class="com.tgweb.struts2.day02.ActionContextTestAction">
+			<result>/WEB-INF/pages/day02/context.jsp</result>
+		</action>
+
+		<action name="aware.day02" class="com.tgweb.struts2.day02.MySuperAwareTestAction">
+			<result>/WEB-INF/pages/day02/aware.jsp</result>
+		</action>
+
+		<action name="aware2.day02" class="com.tgweb.struts2.day02.MySuperAwareTestAction"
+			method="test">
+			<result>/WEB-INF/pages/day02/aware2.jsp</result>
+		</action>
+
+		<action name="servlet.context.day02"
+			class="com.tgweb.struts2.day02.ServletActionContextTestAction">
+			<result>/WEB-INF/pages/day02/servletContext.jsp</result>
+		</action>
+
+		<action name="servlet.aware.day02"
+			class="com.tgweb.struts2.day02.MySuperServletAwareTestAction">
+			<result>/WEB-INF/pages/day02/servletAware.jsp</result>
+		</action>
+
+	</package>
+
+</struts>

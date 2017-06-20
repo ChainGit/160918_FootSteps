@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.custom.i18n.resources" value="i18n"></constant>
+
+	<package name="tg-struts2-n" extends="struts-default">
+
+		<interceptors>
+			<interceptor-stack name="tgStruts2nStack">
+				<interceptor-ref name="defaultStack">
+					<param name="fileUpload.maxiumSize">8192</param>
+					<param name="fileUpload.allowedTypes">text/html</param>
+					<param name="fileUpload.allowedExtensions">html</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="tgStruts2nStack"></default-interceptor-ref>
+
+		<action name="test-file-*" class="com.tgweb.struts2.day16.TestFileUploadAction"
+			method="{1}">
+			<result name="{1}-success">file-{1}.jsp</result>
+			<result name="input">file-{1}.jsp</result>
+		</action>
+
+		<action name="test-file-download" class="com.tgweb.struts2.day16.TestFileDownloadAction"
+			method="download">
+			<result name="download-success">file-download.jsp</result>
+		</action>
+
+		<action name="test-upload" class="com.tgweb.struts2.day16.TestFileUploadAction"
+			method="doUpload">
+			<result name="doUpload-success">upload-success.jsp</result>
+			<result name="input">file-upload.jsp</result>
+		</action>
+
+		<action name="test-upload2" class="com.tgweb.struts2.day16.TestFileUploadAction2"
+			method="doUpload">
+			<result name="doUpload-success">upload-success.jsp</result>
+			<result name="input">file-upload2.jsp</result>
+		</action>
+
+		<action name="test-download" class="com.tgweb.struts2.day16.TestFileDownloadAction"
+			method="doDownload">
+			<result name="doDownload-success" type="stream">
+
+			</result>
+		</action>
+
+	</package>
+
+</struts>

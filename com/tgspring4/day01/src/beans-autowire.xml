@@ -5,13 +5,13 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
 
-	<bean id="house" class="com.tgweb.spring4.day07.House" p:address="nanjing"
+	<bean id="house" class="com.tgweb.spring4.day03.House" p:address="nanjing"
 		p:price="1200000" />
 
-	<bean id="car1" class="com.tgweb.spring4.day07.Car" p:name="Baoma"
+	<bean id="car1" class="com.tgweb.spring4.day03.Car" p:name="Baoma"
 		p:price="1000000"></bean>
 
-	<bean id="car2" class="com.tgweb.spring4.day07.Car" p:name="Audi"
+	<bean id="car2" class="com.tgweb.spring4.day03.Car" p:name="Audi"
 		p:price="800000"></bean>
 
 	<util:list id="cars">
@@ -20,14 +20,14 @@
 	</util:list>
 
 	<!-- 手动装配 -->
-	<bean id="james1" class="com.tgweb.spring4.day07.Person" p:name="James"
+	<bean id="james1" class="com.tgweb.spring4.day03.Person" p:name="James"
 		p:age="20" p:house-ref="house" p:cars-ref="cars"></bean>
 
 	<!-- 自动装配 -->
 	<!-- 局限：byName和byType不能同时支持，且自动装配是装配所有的属性，不能选择性装配 -->
-	<bean id="james2" class="com.tgweb.spring4.day07.Person" p:name="James"
+	<bean id="james2" class="com.tgweb.spring4.day03.Person" p:name="James"
 		p:age="20" autowire="byName"></bean>
-	<bean id="james3" class="com.tgweb.spring4.day07.Person" p:name="James"
+	<bean id="james3" class="com.tgweb.spring4.day03.Person" p:name="James"
 		p:age="20" autowire="byType"></bean>
 
 

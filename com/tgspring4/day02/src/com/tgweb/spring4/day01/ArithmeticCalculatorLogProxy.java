@@ -20,15 +20,26 @@ public class ArithmeticCalculatorLogProxy {
 		Class[] interfaces = new Class[] { ArithmeticCalculator.class };
 		InvocationHandler h = new InvocationHandler() {
 
+			// 环绕通知
 			@Override
 			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 				String methodName = method.getName();
 
-				System.out.println("The method " + methodName + " begins with " + Arrays.asList(args));
+				Object result = null;
+				try {
+					// 前置通知
+					System.out.println("The method " + methodName + " begins with " + Arrays.asList(args));
+					result = method.invoke(target, args);
+					// 返回通知
+					System.out.println("The method " + methodName + " ends with result: " + result);
+				} catch (Exception e) {
+					// 异常通知
+					System.out.println("The method " + methodName + " throw execption: " + e);
+				}
 
-				Object result = method.invoke(target, args);
+				// 后置通知
+				System.out.println("The method " + methodName + " has ended");
 
-				System.out.println("The method " + methodName + " ends with result: " + result);
 				return result;
 			}
 		};

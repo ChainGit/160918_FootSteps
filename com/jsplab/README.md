@@ -1,3 +1,3 @@
 ### School JSP Lesson Labs Code
 
-This is my JSP lesson execrise.
+This is some JSP lesson execrise.

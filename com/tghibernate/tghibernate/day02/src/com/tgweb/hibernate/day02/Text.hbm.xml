@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-7 11:30:42 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.tgweb.hibernate.day02.Text" table="TEXT">
+		<id name="id" type="java.lang.Long" access="field">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="image1" type="java.sql.Blob" access="field">
+			<column name="IMAGE1" />
+		</property>
+		<!-- <property name="article1" type="java.sql.Clob" access="field"> <column 
+			name="ARTICLE1" /> </property> <property name="article2" type="java.lang.String" 
+			access="field"> <column name="ARTICLE2" /> </property> -->
+		<property name="article1" access="field">
+			<column name="ARTICLE1" sql-type="mediumtext"></column>
+		</property>
+		<property name="article2" access="field">
+			<column name="ARTICLE2" sql-type="mediumtext"></column>
+		</property>
+	</class>
+</hibernate-mapping>

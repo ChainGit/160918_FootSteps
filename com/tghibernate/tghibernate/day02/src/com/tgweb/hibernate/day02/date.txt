@@ -1,0 +1,13 @@
+java.util.Date和java.util.Calendar都是Java的基本时间和日期的类型
+
+在JDBC中扩展了：
+java.sql.Date => DATE : 只有日期（年月日）
+java.sql.Time => TIME ： 只有时间（时分秒）
+java.sql.Timestamp => TIMESTAMP ：包含日期和时间
+
+而java.util.Date包含了JDBC的这三个时间和日期类,换句话说就是继承关系，在持久化类的Date类型时应该为java.util.Date
+
+将java.util.Date映射为TIME,DATE,TIMESTAMP(MYSQL中为DATETIME)：
+在Hibernate的映射文件中利用type指定，指定为timestamp,time,date的Hibernate类型即可
+
+Hibernate类型：将Java类映射到SQL类型

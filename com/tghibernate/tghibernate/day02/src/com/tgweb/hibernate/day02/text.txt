@@ -1,0 +1,10 @@
+大对象和Hibernate之间的映射：
+
+java.lang.String(推荐) 或 java.sql.Clob 可以用于表示长度大于255的长文本
+
+byte[] 或者 java.sql.Blob 可以用于表示存储图片或者文件的二进制数据
+
+JDBC API 中：
+java.sql.Club和java.sql.Blob类型对应SQL中CLOB(Character Large Object)和BLOB(Binary Large Object)
+
+在MySQL中CLOB用TEXT,MDEIUMTEXT,LONGTEXT来表示

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-7 14:26:11 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping package="com.tgweb.hibernate.day03">
+	<class name="Student" table="STUDENT">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<property name="age" type="java.lang.Integer">
+			<column name="AGE" />
+		</property>
+		<component name="Score" class="Score">
+			<property name="chinese" column="CHINESE"></property>
+			<property name="math" column="MATH"></property>
+			<property name="english" column="ENGLISH"></property>
+		</component>
+	</class>
+</hibernate-mapping>

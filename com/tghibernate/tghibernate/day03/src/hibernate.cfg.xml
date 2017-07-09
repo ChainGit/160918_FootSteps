@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="connection.url">jdbc:mysql://192.168.56.2/test</property>
+		<property name="connection.username">chain</property>
+		<property name="connection.password">0702</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="dialect.storage_engine">innodb</property>
+
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="hbm2ddl.auto">update</property>
+
+		<property name="c3p0.min_size">5</property>
+		<property name="c3p0.max_size">10</property>
+		<property name="c3p0.timeout">2000</property>
+		<property name="c3p0.acquire_increment">3</property>
+		<property name="c3p0.max_statements">10</property>
+		<property name="c3p0.idle_test_period">2000</property>
+
+		<!-- 一对一的映射关系：外键 -->
+		<!-- <mapping resource="com/tgweb/hibernate/day01/Department.hbm.xml" /> 
+			<mapping resource="com/tgweb/hibernate/day01/Manager.hbm.xml" /> -->
+
+		<!-- 一对一的映射关系：主键 -->
+		<!-- <mapping resource="com/tgweb/hibernate/day02/Department.hbm.xml" /> 
+			<mapping resource="com/tgweb/hibernate/day02/Manager.hbm.xml" /> -->
+
+		<!-- 多对多映射：单向(Catagory -> Item) -->
+		<!-- <mapping resource="com/tgweb/hibernate/day03/Category.hbm.xml" /> 
+			<mapping resource="com/tgweb/hibernate/day03/Item.hbm.xml" /> -->
+			
+		<!-- 多对多映射：双向向(Catagory <-> Item) -->
+		<mapping resource="com/tgweb/hibernate/day04/Category.hbm.xml" />
+		<mapping resource="com/tgweb/hibernate/day04/Item.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

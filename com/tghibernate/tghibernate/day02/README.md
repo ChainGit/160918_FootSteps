@@ -1,3 +1,3 @@
 ### Part Two
 
-Mapping:Component,many-to-one(two kind)
+Mapping: Component,many-to-one(two kind)

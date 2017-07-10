@@ -1,3 +1,3 @@
-### Part Two
+### Part Three
 
-Mapping: 1-1(two kind),n-n(two kind)
+Mapping: one-to-one(two kind),many-to-many(two kind)

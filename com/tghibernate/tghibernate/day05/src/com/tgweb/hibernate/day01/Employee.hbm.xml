@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-10 11:20:52 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.tgweb.hibernate.day01.Employee" table="employee">
+		<id name="id" type="java.lang.Long">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="name" />
+		</property>
+		<property name="salary" type="java.lang.Integer">
+			<column name="salary" />
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="email" />
+		</property>
+		<many-to-one name="department" class="com.tgweb.hibernate.day01.Department"
+			fetch="join">
+			<column name="department_id" />
+		</many-to-one>
+
+		<!-- <cache usage="read-write" /> -->
+	</class>
+	<query name="getEmployeeById"><![CDATA[FROM Employee e WHERE e.id = ?]]></query>
+	<query name="getEmployeeBySalaryRange"><![CDATA[FROM Employee e WHERE e.salary > :minSalary AND e.salary < :maxSalary]]></query>
+</hibernate-mapping>

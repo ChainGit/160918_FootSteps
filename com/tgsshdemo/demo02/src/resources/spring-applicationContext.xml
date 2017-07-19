@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+    <!--根据注解自动配置bean-->
+    <context:component-scan base-package="com.tgweb.ssh"/>
+
+    <!--导入外置properties文件-->
+    <context:property-placeholder location="classpath:resources/db.properties"/>
+
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="initialPoolSize" value="${jdbc.c3p0.initialPoolSize}"/>
+        <property name="maxPoolSize" value="${jdbc.c3p0.maxPoolSize}"/>
+    </bean>
+
+    <!--配置SessionFactory-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:resources/hibernate.cfg.xml"/>
+        <property name="mappingLocations" value="classpath:com/tgweb/ssh/entities/*.hbm.xml"/>
+    </bean>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!--配置事务属性-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--将事务属性与切点结合-->
+    <aop:config>
+        <aop:pointcut id="tgwebTxPointCut" expression="execution(* com.tgweb.ssh.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="tgwebTxPointCut"/>
+    </aop:config>
+
+    <!--注解配置事务-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--导入其他的spring配置文件-->
+    <import resource="classpath:resources/spring-struts2.xml"/>
+
+</beans>

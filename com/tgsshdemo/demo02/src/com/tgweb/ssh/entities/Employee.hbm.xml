@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tgweb.ssh.entities.Employee" table="employee" schema="test" dynamic-update="true"
+           dynamic-insert="true" select-before-update="true">
+        <id name="id" column="id" unsaved-value="0">
+            <generator class="native"/>
+        </id>
+        <property name="employeeId" column="employee_id"/>
+        <property name="employeeName" column="employee_name"/>
+        <property name="employeeEmail" column="employee_email"/>
+        <property name="employeeAge" column="employee_age"/>
+        <property name="employeeBirth" column="employee_birth"/>
+        <property name="employeeCreateTime" column="employee_create_time"/>
+        <many-to-one name="department" class="com.tgweb.ssh.entities.Department">
+            <column name="department_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

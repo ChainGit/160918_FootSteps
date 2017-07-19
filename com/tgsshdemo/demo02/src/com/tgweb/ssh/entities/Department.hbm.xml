@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tgweb.ssh.entities.Department" table="department" schema="test">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="departmentId" column="department_id"/>
+        <property name="departmentName" column="department_name"/>
+        <set name="employeeSet" table="employee" inverse="true">
+            <key>
+                <column name="department_id"/>
+            </key>
+            <one-to-many class="com.tgweb.ssh.entities.Employee"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div, span, p {
+	width: 140px;
+	height: 140px;
+	margin: 5px;
+	background: #aaa;
+	border: #000 1px solid;
+	float: left;
+	font-size: 17px;
+	font-family: Verdana;
+}
+
+div.mini {
+	width: 55px;
+	height: 55px;
+	background-color: #aaa;
+	font-size: 12px;
+}
+
+div.hide {
+	display: none;
+}
+</style>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	//属性过滤选择器([])练习
+	$(function() {
+		var color = "#ffbbaa";
+
+		$("#btn1").click(function() {
+			console.log(this.id);
+			$("div[title]").css("background", color);
+		});
+
+		$("#btn2").click(function() {
+			console.log(this.id);
+			$("div[title='test']").css("background", color);
+		});
+
+		$("#btn3").click(function() {
+			console.log(this.id);
+			$("*[title!='test']").css("background", color);
+		});
+
+		$("#btn4").click(function() {
+			console.log(this.id);
+			$("*[title^='te']").css("background", color);
+		});
+
+		$("#btn5").click(function() {
+			console.log(this.id);
+			$("*[title$='st']").css("background", color);
+		});
+
+		$("#btn6").click(function() {
+			console.log(this.id);
+			$("*[title*='es']").css("background", color);
+		});
+
+		$("#btn7").click(function() {
+			console.log(this.id);
+			$("*[id][title*='es']").css("background", color);
+		});
+
+	})
+</script>
+</head>
+<body>
+
+	<button id="btn1">选择含有属性title的div元素</button>
+	<button id="btn2">选择含有属性title且title值等于test的div元素</button>
+	<button id="btn3">选择含有属性title且title值不等于test的元素</button>
+	<button id="btn4">选择含有属性title且title值以te开头的元素</button>
+	<button id="btn5">选择含有属性title且title值以st结尾的元素</button>
+	<button id="btn6">选择含有属性title且title值包含es的元素</button>
+	<button id="btn7">选取属性包含id和title的元素，并且title值包含es的div元素</button>
+
+	<br />
+	<hr />
+	<br />
+
+	<h2>过滤选择器</h2>
+
+	<div class="one" id="one">
+		id为one,class为one的div
+		<div class="mini" title="best">class为mini的div,title为best</div>
+	</div>
+
+	<div class="one" id="two" title="test">
+		id为two,class为one,title为test的div
+		<div class="mini" title="other">class为mini,title为other的div</div>
+		<div class="mini hide" title="test">class为mini,title为test的div</div>
+	</div>
+
+	<div class="one">
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini"></div>
+	</div>
+
+	<div class="one">
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini">class为mini的div</div>
+		<div class="mini" title="hello">class为mini,title为hello的div</div>
+	</div>
+
+	<div class="two" style="display: none">
+		<input type="hidden" value="VALUEX" /> 包含input的type为hidden的div
+	</div>
+
+	<span class="two" title="east">span元素1,title为east</span>
+	<span class="two" class="hide">span元素2 </span>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="house" class="com.tgweb.spring4.day07.House">
+		<property name="address" value="#{'Beijing'}"></property>
+		<property name="price" value="#{T(java.lang.Math).PI * 80}"></property>
+	</bean>
+
+	<bean id="car" class="com.tgweb.spring4.day07.Car">
+		<property name="name" value="Audi"></property>
+		<property name="price" value="790000"></property>
+		<property name="info" value="#{car.price > 300000 ? '金领' : '白领'}"></property>
+	</bean>
+
+	<bean id="james" class="com.tgweb.spring4.day07.Person">
+		<property name="name" value="James1"></property>
+		<property name="age" value="20"></property>
+		<property name="house" value="#{house}"></property>
+		<property name="car" value="#{car}"></property>
+		<property name="address" value="#{house.address}"></property>
+		<property name="info" value="#{car.info}"></property>
+	</bean>
+
+</beans>

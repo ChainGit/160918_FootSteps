@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO TABLE</title>
+<link rel="stylesheet" href="bootstrap.min.css" />
+<link rel="stylesheet" href="demo.css" />
+</head>
+<!-- 使用DOM和原生JS -->
+<!-- 代码有诸多不严谨之处,请谅解 -->
+<body>
+
+	<div class="body-size">
+
+		<div class="head-size">
+			<div class="head-left-size">
+				<button class="btn btn-primary" id="addBtn">增加数据</button>
+				<div class="btn-group">
+					<button class="btn btn-default sort-size" id="sortBtn">排序</button>
+					<select class="select-size" id="sortSelt">
+						<option>按序号</option>
+						<option>按姓名</option>
+						<option>按年龄</option>
+						<option>按薪水</option>
+					</select>
+				</div>
+			</div>
+			<div class="head-right-size">
+				<div class="reset-size">
+					<button class="btn btn-info" id="resetBtn">清空搜索结果</button>
+				</div>
+				<div class="input-group search-size">
+					<input type="text" class="form-control" id="searchTxt" /> <span
+						class="input-group-btn">
+						<button class="btn btn-default" type="button" id="searchBtn">搜索</button>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="table-size">
+			<table class="table table-bordered table-striped table-hover"
+				id="tableData">
+				<tr>
+					<th>序号</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>薪水</th>
+					<th>操作</th>
+				</tr>
+			</table>
+		</div>
+
+		<div class="bottom-size">
+			<input type="checkbox" id="chkboxAll" />全选/反全选
+			<button class="btn btn-default" id="deleteChkBoxBtn">删除所选</button>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="demo.js"></script>
+</body>
+</html>

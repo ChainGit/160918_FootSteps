@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+@charset "utf-8";
+
+.demo {
+	padding-left: 100px;
+	padding-top: 100px;
+	width: 200px;
+	height: 200px;
+	width: 200px;
+}
+
+.demo .clstop {
+	height: 10%;
+	border: 1px solid blue;
+}
+
+.demo .clscnt {
+	height: 90%;
+	border: 1px solid green;
+	border-top: none;
+	display: none;
+}
+</style>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	//事件
+	$(function() {
+		//方式1
+		/*
+		$(".clstop").click(function() {
+			var flag = $(".clscnt").is(":hidden");
+			if (flag)
+				$(".clscnt").show();
+			else
+				$(".clscnt").hide();
+		});
+		 */
+
+		//方式2
+		/*
+		$(".clstop").bind("click", function() {
+			var flag = $(".clscnt").is(":hidden");
+			if (flag)
+				$(".clscnt").show();
+			else
+				$(".clscnt").hide();
+		});
+		 */
+
+		//方式3
+		/*
+		$(".clstop").mouseover(function() {
+			$(".clscnt").show(200);
+		}).mouseout(function() {
+			$(".clscnt").hide(200);
+		});
+		 */
+
+		//方式4
+		$(".clstop").hover(function() {
+			$(".clscnt").show(200);
+		}, function() {
+			$(".clscnt").hide(200);
+		});
+
+		//方式5
+		$(".clstop").toggle(function() {
+			$(".clstop").css("color", "red");
+		}, function() {
+			$(".clstop").css("color", "blue");
+		}, function() {
+			$(".clstop").css("color", "green");
+		});
+
+	})
+</script>
+</head>
+
+<body>
+
+	<div class="demo">
+		<div class="clstop">详情详情详情</div>
+		<div class="clscnt">内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+	</div>
+</body>
+</html>

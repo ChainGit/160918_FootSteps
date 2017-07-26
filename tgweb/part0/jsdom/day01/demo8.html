@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO ONE</title>
+
+<script type="text/javascript">
+	//删除节点
+	window.onload = function() {
+		var res = confirm("确定要删除吗?");
+		if (res) {
+			var ulCity = document.getElementById("city");
+			ulCity.parentNode.removeChild(ulCity);
+		}
+	}
+</script>
+
+</head>
+<body>
+
+	<div id="dc">
+		<p>你喜欢哪个城市</p>
+		<ul id="city">
+			<li>北京</li>
+			<li>上海</li>
+			<li>南京</li>
+			<li>广州</li>
+		</ul>
+	</div>
+
+	<div id="df">
+		<p>你喜欢哪个水果</p>
+		<ul id="fruit">
+			<li>苹果</li>
+			<li>梨子</li>
+			<li>香蕉</li>
+			<li>橘子</li>
+		</ul>
+	</div>
+
+</body>
+</html>

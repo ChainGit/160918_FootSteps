@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HOME EDIT AJAX</title>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            init();
+
+            function init() {
+                getDeparments();
+                var id = getId();
+                if (id != null)
+                    getEmployeeInfo(id);
+
+                $("input[name='employeeId']").change(function () {
+                    var $this = $(this);
+                    if ($this.val().length < 1)
+                        return;
+                    var url = "home.ajax.check.action";
+                    var args = {
+                        "t": new Date().getTime(),
+                        "eId": $this.val()
+                    };
+                    $this.nextAll("font").remove();
+                    $.post(url, args, function (data) {
+                        var p = eval("(" + data + ")");
+                        var status = p.status;
+                        if (status) {
+                            $this.after($("<font></font>").text("可用"));
+                        } else {
+                            $this.after($("<font></font>").text("不可用"));
+                        }
+                    });
+                });
+            }
+
+            function getEmployeeInfo(id) {
+                var url = "home.ajax.emp.action";
+                var args = {
+                    "t": new Date().getTime(),
+                    "id": id
+                };
+                $.post(url, args, function (data) {
+                    var p = eval("(" + data + ")");
+                    var e = p.emp;
+
+                    var id = e.id;
+                    var employeeId = e.employeeId;
+                    var employeeName = e.employeeName;
+                    var employeeBirth = e.employeeBirth;
+                    var employeeCreateTime = e.employeeCreateTime;
+                    var employeeAge = e.employeeAge;
+                    var employeeEmail = e.employeeEmail;
+                    var department = e.department.id;
+
+                    $("input[name='id']").val(id);
+                    $("input[name='employeeId']").val(employeeId);
+                    $("input[name='employeeName']").val(employeeName);
+                    $("input[name='employeeBirth']").val(employeeBirth);
+                    $("input[name='employeeCreateTime']").val(employeeCreateTime);
+                    $("input[name='employeeAge']").val(employeeAge);
+                    $("input[name='employeeEmail']").val(employeeEmail);
+                    $("select[name='department.id'] > option[value=" + department + "]").attr("selected", "selected");
+                });
+            }
+
+            function getDeparments() {
+                var url = "home.ajax.depts.action";
+                var args = {
+                    "t": new Date().getTime()
+                };
+                $.post(url, args, function (data) {
+                    var p = eval("(" + data + ")");
+                    var depts = p.depts;
+                    var $depts = $("select[name='department.id']");
+                    for (var i = 0; i < depts.length; i++) {
+                        var d = depts[i];
+                        var id = d.id;
+                        var name = d.departmentName;
+                        $depts.append($("<option></option>").attr("value", id).text(name));
+                    }
+                });
+            }
+
+            function getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]);
+                return null;
+            }
+
+            function getId() {
+                return getQueryString("id");
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+
+<a href="/">返回INDEX</a>
+
+
+<h2>SSH-02 AJAX EDIT</h2>
+<h4>公司员工信息管理 - 编辑</h4>
+
+<p>员工ID可用检测为AJAX</p>
+
+<form action="home.ajax.input.action" method="post">
+    <input type="hidden" name="id"/>
+    <span>员工ID：</span><input type="text" name="employeeId"/><br/>
+    <span>员工姓名：</span><input type="text" name="employeeName"/><br/>
+    <span>员工出生日期：</span><input type="text" name="employeeBirth"/><br/>
+    <input type="hidden" name="employeeCreateTime"/>
+    <input type="hidden" name="employeeAge"/>
+    <span>员工邮箱：</span><input type="text" name="employeeEmail"/><br/>
+    <span>员工所属部门：</span>
+    <select name="department.id">
+        <option value="0">请选择</option>
+    </select><br/>
+    <input type="submit"/>
+</form>
+
+</body>
+</html>

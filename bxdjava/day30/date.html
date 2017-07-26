@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<title>DATE_DEMO</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</HEAD>
+
+<BODY>
+
+<script type="text/javascript">
+Date.prototype.getChineseWeek = function(){
+	var a = this.getDay();
+	var w = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+	return w[a];
+}
+
+var date = new Date();
+console.log(date);
+console.log(date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()+" "
+			+" "+date.getChineseWeek());
+			
+with(date){
+	console.log(getFullYear()+"/"+(getMonth()+1)+"/"+getDate()+" "
+			+" "+getChineseWeek());
+}
+</script>
+
+</BODY>
+
+</HTML>

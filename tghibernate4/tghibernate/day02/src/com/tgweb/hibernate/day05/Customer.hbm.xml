@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-8 20:03:52 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.tgweb.hibernate.day05.Customer" table="CUSTOMER">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="name" type="java.lang.String">
+			<column name="NAME" />
+		</property>
+		<set name="buys" table="BUY" inverse="true" lazy="true" order-by="NAME DESC">
+			<key>
+				<column name="CUSTOMER_ID" />
+			</key>
+			<one-to-many class="com.tgweb.hibernate.day05.Buy" />
+		</set>
+	</class>
+</hibernate-mapping>

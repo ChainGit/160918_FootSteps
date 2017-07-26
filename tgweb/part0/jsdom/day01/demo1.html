@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO ONE</title>
+
+<script type="text/javascript">
+	//获取节点的三种方式
+	window.onload = function() {
+		var ulcity = document.getElementById("city");
+		console.log(ulcity);
+
+		var lis = document.getElementsByTagName("li");
+		console.log(lis);
+
+		var lisInUlCity = ulcity.getElementsByTagName("li");
+		console.log(lisInUlCity);
+
+		var radioSex = document.getElementsByName("sex");
+		console.log(radioSex);
+
+	}
+</script>
+
+</head>
+<body>
+
+	<p>你喜欢哪个城市</p>
+	<ul id="city">
+		<li>北京</li>
+		<li>上海</li>
+		<li>南京</li>
+		<li>广州</li>
+	</ul>
+
+	<p>你喜欢哪个水果</p>
+	<ul>
+		<li>苹果</li>
+		<li>梨子</li>
+		<li>香蕉</li>
+		<li>橘子</li>
+	</ul>
+
+	<p>您的性别</p>
+	<input type="radio" name="sex" />男
+	<input type="radio" name="sex" />女
+
+</body>
+</html>

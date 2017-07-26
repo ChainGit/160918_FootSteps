@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO NINE</title>
+
+<script type="text/javascript">
+	//增加和删除节点
+	var flagName = false;
+	var flagAge = false;
+	var flagSalary = false;
+	var submitBtn = null;
+
+	window.onload = function() {
+		var nameInput = document.getElementsByName("name")[0];
+		var ageInput = document.getElementsByName("age")[0];
+		var salaryInput = document.getElementsByName("salary")[0];
+		submitBtn = document.getElementsByName("submit")[0];
+
+		var tbodyNode = document.getElementsByTagName("tbody")[0];
+
+		nameInput.onchange = function() {
+			var text = nameInput.value;
+			if (text.length > 0)
+				flagName = true;
+			else
+				flagName = false;
+
+			isChanged();
+		}
+
+		ageInput.onchange = function() {
+			var text = ageInput.value;
+			if (text.length > 0)
+				flagAge = true;
+			else
+				flagAge = false;
+
+			isChanged();
+		}
+
+		salaryInput.onchange = function() {
+			var text = salaryInput.value;
+			if (text.length > 0)
+				flagSalary = true;
+			else
+				flagSalary = false;
+
+			isChanged();
+		}
+
+		submitBtn.onclick = function() {
+			var trNode = document.createElement("tr");
+
+			var tdNodeName = document.createElement("td");
+			var tdNodeAge = document.createElement("td");
+			var tdNodeSalary = document.createElement("td");
+			var tdNodeDelete = document.createElement("td");
+
+			var aNodeDelete = document.createElement("a");
+			aNodeDelete.innerText = "删除";
+			aNodeDelete.href = "#";
+			aNodeDelete.onclick = function() {
+				var res = confirm("确定要删除?");
+				if (res)
+					tbodyNode.removeChild(this.parentNode.parentNode);
+			}
+
+			tdNodeName.innerText = trim(nameInput.value);
+			tdNodeAge.innerText = trim(ageInput.value);
+			tdNodeSalary.innerText = trim(salaryInput.value);
+
+			tdNodeDelete.appendChild(aNodeDelete);
+
+			trNode.appendChild(tdNodeName);
+			trNode.appendChild(tdNodeAge);
+			trNode.appendChild(tdNodeSalary);
+			trNode.appendChild(tdNodeDelete);
+
+			tbodyNode.appendChild(trNode);
+
+			return false;
+		}
+
+	}
+
+	function isChanged() {
+		if (submitBtn != null)
+			if (flagName && flagAge && flagSalary)
+				submitBtn.disabled = "";
+			else
+				submitBtn.disabled = "disabled";
+	}
+
+	function trim(str) {
+		var reg = /^\s*|\s*$/g;
+		return str.replace(reg, "");
+	}
+
+	/*
+	function getParameter(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null)
+			return unescape(r[2]);
+		return null;
+	}
+	*/
+</script>
+
+</head>
+<body>
+
+	姓名：
+	<input type="text" name="name" value="" />
+	<br /> 年龄：
+	<input type="text" name="age" value="" />
+	<br /> 工资：
+	<input type="text" name="salary" value="" />
+	<br />
+	<input type="submit" name="submit" disabled="disabled" />
+	<br />
+
+	<br />
+	<br />
+	<hr />
+	<br />
+
+	<table border="1" cellpadding="10px" cellspacing="0px">
+		<tr>
+			<th>姓名</th>
+			<th>年龄</th>
+			<th>工资</th>
+			<th>操作</th>
+		</tr>
+	</table>
+
+</body>
+</html>

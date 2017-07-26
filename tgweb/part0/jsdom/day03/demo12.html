@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	//select级联选择
+	window.onload = function() {
+		var kind = document.getElementsByName("kind")[0];
+		var content = document.getElementsByName("content")[0];
+		var choose = document.getElementById("choose");
+
+		var xmlData = parseXml("data.xml");
+		var kinds = xmlData.getElementsByTagName("type");
+
+		kind.onchange = function() {
+			var sel = this.value;
+
+			// 方式一：数组定位
+			// var xdata = kinds[sel].getElementsByTagName("content");
+			// 方式二：XPath
+			var xdata = xmlData.selectNodes("//type[@name='" + sel + "']")[0]
+					.getElementsByTagName("content");
+
+			//倒序依次删除
+			while (content.lastChild != null)
+				content.removeChild(content.lastChild);
+
+			//更新新值
+			for (var i = 0; i < xdata.length; i++) {
+				var dat = xdata[i].firstChild.nodeValue;
+				var txt = document.createTextNode(dat);
+				var opt = document.createElement("option");
+				opt.appendChild(txt);
+				content.appendChild(opt);
+			}
+		}
+
+		content.onchange = function() {
+			var sel = kind.value;
+			var dat = content.value;
+			choose.innerText = sel + "-" + dat;
+		}
+	}
+
+	function parseXml(file) {
+		//只支持IE
+		if (window.ActiveXObject) {
+			var doc = new ActiveXObject("Microsoft.XMLDOM");
+			doc.async = "false";
+			doc.load(file);
+			return doc;
+		}
+	}
+</script>
+
+</head>
+
+<body>
+
+	<select name="kind">
+		<option value="0">请选择</option>
+		<option>1</option>
+		<option>2</option>
+		<option>3</option>
+	</select>
+
+	<select name="content">
+		<option>请选择</option>
+	</select>
+
+	<p id="choose"></p>
+
+</body>
+</html>

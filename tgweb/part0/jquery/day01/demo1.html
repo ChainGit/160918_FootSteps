@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	//相当于window.onload
+	$(function() {
+		//jquery对象(是一个数组)
+		var $btns = $("button");
+		console.log($btns);
+		console.log($btns.length);
+
+		var $btna = $("#btna");
+		console.log("--" + $btna.text());
+
+		//DOM对象
+		var btnb = document.getElementById("btnb");
+		console.log("--" + btnb.innerText);
+
+		//DOM转jQuery对象
+		var $btnb = $(btnb);
+
+		//jQuery转DOM对象
+		var btna = $btna[0].firstChild;
+
+		console.log("==" + btna.nodeValue);
+		console.log("==" + $btnb.text());
+
+		//同一个btn添加多个相同方法时按定义顺序依次执行
+		$btns.click(function() {
+			console.log($(this).text());
+		});
+
+		$("#btna").click(function() {
+			console.log("hello");
+		});
+	})
+</script>
+</head>
+<body>
+
+	<button id="btna">按钮A</button>
+	<button id="btnb">按钮B</button>
+
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+
+</body>
+</html>

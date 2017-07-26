@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.custom.i18n.resources" value="i18n"></constant>
+
+	<package name="tg-struts2-m" extends="struts-default">
+
+		<action name="show" class="com.tgweb.struts2.day13.TestValidationAcion"
+			method="show">
+			<result name="input">vali.jsp</result>
+			<result name="show-success">show.jsp</result>
+		</action>
+
+		<action name="show2" class="com.tgweb.struts2.day13.TestValidationAcion"
+			method="show">
+			<result name="input">vali2.jsp</result>
+			<result name="show-success">show.jsp</result>
+		</action>
+
+		<action name="vali" class="com.tgweb.struts2.day13.TestValidationAcion"
+			method="vali">
+			<result name="vali-success">vali.jsp</result>
+		</action>
+
+		<action name="vali2" class="com.tgweb.struts2.day13.TestValidationAcion"
+			method="vali2">
+			<result name="vali2-success">vali2.jsp</result>
+		</action>
+
+	</package>
+
+</struts>

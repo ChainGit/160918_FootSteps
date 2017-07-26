@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript">
+	//事件的反绑定
+	$(function() {
+		$("button:first").click(function() {
+			console.log("clicked1");
+			$(this).unbind("click");
+		});
+
+		$("button:last").one("click", function() {
+			console.log("clicked2");
+		});
+
+	})
+</script>
+</head>
+
+<body>
+
+	<button>只能点击一次1</button>
+	<button>只能点击一次2</button>
+
+</body>
+</html>

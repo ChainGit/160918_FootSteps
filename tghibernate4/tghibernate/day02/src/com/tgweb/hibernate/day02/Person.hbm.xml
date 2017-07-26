@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-7 10:50:18 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<class name="com.tgweb.hibernate.day02.Person" table="PERSON">
+		<id name="id" type="java.lang.Long" access="field">
+			<column name="ID" />
+			<generator class="native" />
+		</id>
+		<!-- 默认是java.util.Date，从效果上和timestamp一样 -->
+		<property name="birth1" type="timestamp" access="field">
+			<column name="BIRTH1" />
+		</property>
+		<property name="birth2" type="time" access="field">
+			<column name="BIRTH2" />
+		</property>
+		<property name="birth3" type="date" access="field">
+			<column name="BIRTH3" />
+		</property>
+		<property name="birth4" type="date" access="field">
+			<column name="BIRTH4" />
+		</property>
+		<property name="birth5" type="time" access="field">
+			<column name="BIRTH5" />
+		</property>
+		<property name="birth6" type="timestamp" access="field">
+			<column name="BIRTH6" />
+		</property>
+	</class>
+</hibernate-mapping>

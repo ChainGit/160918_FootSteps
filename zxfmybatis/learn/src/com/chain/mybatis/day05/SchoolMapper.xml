@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chain.mybatis.day05.SchoolMapper">
+
+    <select id="getClassById" parameterType="int" resultMap="result2Map">
+        SELECT *
+        FROM c_class, c_teacher
+        WHERE c_class.class_id = #{id} AND c_class.teacher_id = c_teacher.teacher_id;
+    </select>
+
+    <resultMap id="result2Map" type="com.chain.mybatis.day05.Class">
+        <id property="id" column="class_id"/>
+        <result property="name" column="class_name"/>
+        <association property="teacher" javaType="com.chain.mybatis.day05.Teacher">
+            <id property="id" column="teacher_id"/>
+            <result property="name" column="teacher_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getClassById2" parameterType="int" resultMap="result2Map2">
+        SELECT *
+        FROM c_class
+        WHERE class_id = #{id};
+    </select>
+
+    <select id="getTeacherById" parameterType="int" resultType="com.chain.mybatis.day05.Teacher">
+        SELECT
+            teacher_id   id,
+            teacher_name name
+        FROM c_teacher
+        WHERE teacher_id = #{id};
+    </select>
+
+    <resultMap id="result2Map2" type="com.chain.mybatis.day05.Class">
+        <id property="id" column="class_id"/>
+        <result property="name" column="class_name"/>
+        <association property="teacher" column="teacher_id" select="getTeacherById"/>
+    </resultMap>
+
+    <select id="getClassById3" parameterType="int" resultMap="result2Map3">
+        SELECT *
+        FROM c_student s, c_class c, c_teacher t
+        WHERE c.class_id = #{id} AND c.teacher_id = t.teacher_id AND s.class_id = c.class_id;
+    </select>
+
+    <resultMap id="result2Map3" type="com.chain.mybatis.day05.Class">
+        <id property="id" column="class_id"/>
+        <result property="name" column="class_name"/>
+        <association property="teacher" javaType="com.chain.mybatis.day05.Teacher">
+            <id property="id" column="teacher_id"/>
+            <result property="name" column="teacher_name"/>
+        </association>
+        <collection property="students" ofType="com.chain.mybatis.day05.Student">
+            <id property="id" column="student_id"/>
+            <result property="name" column="student_name"/>
+            <result property="age" column="student_age"/>
+        </collection>
+    </resultMap>
+
+    <select id="getStudentById" parameterType="int" resultType="com.chain.mybatis.day05.Student">
+        SELECT
+            student_id   id,
+            student_name name,
+            student_age  age
+        FROM c_student
+        WHERE student_id = #{id};
+    </select>
+
+    <select id="getStudentByClassId" parameterType="int" resultType="com.chain.mybatis.day05.Student">
+        SELECT
+            s.student_id   id,
+            s.student_name name,
+            s.student_age  age
+        FROM c_student s
+        WHERE s.class_id = #{id};
+    </select>
+
+    <select id="getClassById4" parameterType="int" resultMap="result2Map4">
+        SELECT *
+        FROM c_class
+        WHERE class_id = #{id};
+    </select>
+
+    <resultMap id="result2Map4" type="com.chain.mybatis.day05.Class">
+        <id property="id" column="class_id"/>
+        <result property="name" column="class_name"/>
+        <association property="teacher" column="teacher_id" select="getTeacherById"/>
+        <collection property="students" column="class_id" select="getStudentByClassId"/>
+    </resultMap>
+</mapper>

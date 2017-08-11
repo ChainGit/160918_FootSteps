@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chain.mybatis.day06.UserMapper">
+
+    <select id="getUsersByFilter" parameterType="com.chain.mybatis.day06.UserFilter"
+            resultType="com.chain.mybatis.day06.User">
+        SELECT
+        u.id id,
+        u.name name,
+        u.age age
+        FROM c_user u
+        WHERE
+        <if test='name!="%null%"'>
+            u.name LIKE #{name} AND
+        </if>
+        u.age BETWEEN #{minAge} AND #{maxAge};
+    </select>
+
+    <select id="countUsersByType" parameterMap="param2Map" statementType="CALLABLE">
+        CALL count_user_by_type(?, ?);
+    </select>
+
+    <parameterMap id="param2Map" type="java.util.Map">
+        <parameter property="s_type" jdbcType="INTEGER" mode="IN"/>
+        <parameter property="s_amount" jdbcType="INTEGER" mode="OUT"/>
+    </parameterMap>
+
+</mapper>

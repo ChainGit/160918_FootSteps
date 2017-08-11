@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chain.mybatis.day04.OrderMapper">
+
+    <select id="getOrderById" parameterType="int" resultType="com.chain.mybatis.day04.Order">
+        SELECT
+            order_id     id,
+            order_name   name,
+            order_amount amount
+        FROM c_order
+        WHERE order_id = #{id};
+    </select>
+
+    <select id="getOrderById2" parameterType="int" resultMap="dborder2Order">
+        SELECT *
+        FROM c_order
+        WHERE order_id = #{id};
+    </select>
+
+    <resultMap id="dborder2Order" type="com.chain.mybatis.day04.Order">
+        <id property="id" column="order_id"/>
+        <result property="name" column="order_name"/>
+        <result property="amount" column="order_amount"/>
+    </resultMap>
+
+</mapper>

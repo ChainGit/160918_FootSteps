@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chain.sm.mapper.UserMapper">
+
+    <select id="getById" parameterType="int" resultType="User">
+        SELECT *
+        FROM s_user
+        WHERE id = #{id};
+    </select>
+
+    <select id="getAll" resultType="User">
+        SELECT *
+        FROM s_user;
+    </select>
+
+    <update id="update" parameterType="User">
+        UPDATE s_user
+        SET name = #{name}, age = #{age}
+        WHERE id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        DELETE FROM s_user
+        WHERE id = #{id};
+    </delete>
+
+    <insert id="add" parameterType="User">
+        INSERT INTO s_user (name, age) VALUES (#{name}, #{age});
+    </insert>
+
+</mapper>

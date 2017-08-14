@@ -1,10 +1,8 @@
 package com.tgweb.springmvc.handlers;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.tgweb.springmvc.dao.DepartmentDao;
 import com.tgweb.springmvc.dao.EmployeeDao;
 import com.tgweb.springmvc.entities.Employee;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,4 +75,15 @@ public class EmployeeHandler {
         return SUCCESS;
     }
 
+    @RequestMapping(value = "/add2")
+    public String addView2() {
+        return "add2";
+    }
+
+    //String转Employee
+    @RequestMapping(value = "/e2", method = RequestMethod.POST)
+    public String addEmployee2(ServletRequest request, @RequestParam("employee") Employee e) {
+        employeeDao.add(e);
+        return "redirect:" + request.getServletContext().getContextPath() + "/day02/list";
+    }
 }

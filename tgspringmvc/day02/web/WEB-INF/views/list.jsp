@@ -55,5 +55,9 @@
 
 <br/>
 <a href="<%=request.getContextPath()%>/day02/add">增加员工</a>
+
+<br/>
+<a href="<%=request.getContextPath()%>/day02/add2">增加员工2</a>
+
 </body>
 </html>

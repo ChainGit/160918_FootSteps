@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: Chain
   Date: 2017/8/13
@@ -18,8 +19,17 @@
 <form:form action="${pageContext.request.contextPath}/day02/e" method="POST" modelAttribute="employee">
     <form:hidden path="id"/>
     <input type="hidden" name="_method" value="${requestScope.employee.id==0?'POST':'PUT'}"/>
-    姓名：<form:input path="name"/><br/>
-    员工：<form:select path="department.id" items="${requestScope.departments}" itemLabel="name" itemValue="id"/><br/>
+    姓名：<form:input path="name"/><form:errors path="name"/> <br/>
+    <%
+        Map<String, String> genderMap = new HashMap<String, String>();
+        genderMap.put("0", "男");
+        genderMap.put("1", "女");
+        pageContext.setAttribute("genderMap", genderMap);
+    %>
+    性别：<form:radiobuttons path="gender" items="${genderMap}"/><br/>
+    生日：<form:input path="birth"/><form:errors path="birth"/><br/>
+    薪水：<form:input path="salary"/><form:errors path="salary"/><br/>
+    部门：<form:select path="department.id" items="${requestScope.departments}" itemLabel="name" itemValue="id"/><br/>
     <input type="submit" value="提交"/>
 </form:form>
 

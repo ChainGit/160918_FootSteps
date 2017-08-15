@@ -14,7 +14,18 @@
 
 <h4>Restful风格的CRUD练习</h4>
 
-<a href="<%=request.getContextPath()%>/day02/list">列表</a>
+<%
+    String ctx = request.getContextPath();
+    pageContext.setAttribute("ctx", ctx);
+%>
+
+<a href="${ctx}/day02/list">列表</a>
+
+<a href="${ctx}/day02/testjson">列表(JSON)</a>
+
+<a href="${ctx}/day02/testi18n?locale=zh_CH">测试国际化(中文)</a>
+
+<a href="${ctx}/day02/testi18n?locale=en_US">测试国际化(英文)</a>
 
 </body>
 </html>

@@ -1,7 +1,10 @@
-package com.tgweb.springmvc.converters;
+package com.tgweb.springmvc.common.converters;
 
+import com.chain.utils.StringUtils;
 import com.tgweb.springmvc.entities.Department;
 import com.tgweb.springmvc.entities.Employee;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class StringToEmployeeConverter implements Converter<String, Employee> {
 
+    private Logger logger = LoggerFactory.getLogger(StringToEmployeeConverter.class);
+
     @Override
     public Employee convert(String s) {
-        if (s == null)
-            return null;
+        if (StringUtils.isEmpty(s))
+            throw new RuntimeException("empty string");
         String[] parts = s.split("#");
         if (parts.length == 3) {
             String sid = parts[0];

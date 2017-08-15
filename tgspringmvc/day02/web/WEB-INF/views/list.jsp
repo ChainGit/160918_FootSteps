@@ -34,6 +34,9 @@
         <tr>
             <th>员工ID</th>
             <th>员工姓名</th>
+            <th>员工性别</th>
+            <th>员工生日</th>
+            <th>员工薪水</th>
             <th>员工部门</th>
             <th>操作</th>
         </tr>
@@ -43,6 +46,9 @@
             <tr>
                 <td>${e.id}</td>
                 <td>${e.name}</td>
+                <td>${e.gender==0?"男":"女"}</td>
+                <td>${e.birth==null?"无":e.birth}</td>
+                <td>${e.salary==null?"无":e.salary}</td>
                 <td>${e.department==null?"无":e.department.name}</td>
                 <td><a href="<%=request.getContextPath()%>/day02/edit?id=${e.id}">修改</a>&nbsp;
                     <a class="mvcdelete" href="<%=request.getContextPath()%>/day02/e/${e.id}">删除</a>

@@ -64,24 +64,19 @@ WHERE s1.`from_date` = s2.`to_date`;
 嵌套双层查询可以解决 LIMIT & SUBQUERY
 */
 
-### 1.查询出所有的经理的员工号
+### 1.查询出所有的在职经理的员工号
 
-SELECT emp_no FROM dept_manager dm;
+SELECT emp_no FROM dept_manager dm WHERE dm.`to_date`='9999-01-01';
 
 ### 2.查出工资最高的经理的员工号
  SELECT
   emp_no,
-  salary,
-  from_date,
-  to_date
+  salary
 FROM
   salaries s
 WHERE s.`to_date` = '9999-01-01'
   AND s.emp_no IN
-  (SELECT
-    emp_no
-  FROM
-    dept_manager dm)
+  (SELECT emp_no FROM dept_manager dm WHERE dm.`to_date`='9999-01-01')
 ORDER BY s.salary DESC
 LIMIT 1;
 
@@ -91,23 +86,18 @@ LIMIT 1;
 FROM
   dept_manager dm
 WHERE dm.`emp_no` IN
-  (SELECT t.emp_no FROM (SELECT
+  (SELECT t.emp_no FROM ( SELECT
   emp_no,
-  salary,
-  from_date,
-  to_date
+  salary
 FROM
   salaries s
 WHERE s.`to_date` = '9999-01-01'
   AND s.emp_no IN
-  (SELECT
-    emp_no
-  FROM
-    dept_manager dm)
+  (SELECT emp_no FROM dept_manager dm WHERE dm.`to_date`='9999-01-01')
 ORDER BY s.salary DESC
 LIMIT 1) AS t);
         
-### 4.由3结果查询该部门内所有员工号
+### 4.由3结果查询该部门内所有在职员工号
  SELECT
   de.`emp_no`
 FROM
@@ -130,9 +120,9 @@ WHERE s.`to_date` = '9999-01-01'
   (SELECT
     emp_no
   FROM
-    dept_manager dm)
+    dept_manager dm WHERE dm.`to_date`='9999-01-01')
 ORDER BY s.salary DESC
-LIMIT 1) AS t));
+LIMIT 1) AS t)) AND de.`to_date`='9999-01-01';
 
           
 ### 5.由4结果查询工资最低的员工号
@@ -158,9 +148,9 @@ WHERE s.`to_date` = '9999-01-01'
   (SELECT
     emp_no
   FROM
-    dept_manager dm)
+    dept_manager dm WHERE dm.`to_date`='9999-01-01')
 ORDER BY s.salary DESC
-LIMIT 1) AS t))) ORDER BY s.`salary` LIMIT 1;
+LIMIT 1) AS t)) AND de.`to_date`='9999-01-01') AND s.`to_date`='9999-01-01' ORDER BY s.`salary` LIMIT 1;
 
 ### 6.由5结果查询出所需信息
  SELECT
@@ -206,9 +196,12 @@ FROM
             (SELECT
               emp_no
             FROM
-              dept_manager dm)
+              dept_manager dm
+            WHERE dm.`to_date` = '9999-01-01')
           ORDER BY s.salary DESC
-          LIMIT 1) AS t)))
+          LIMIT 1) AS t))
+      AND de.`to_date` = '9999-01-01')
+    AND s.`to_date` = '9999-01-01'
   ORDER BY s.`salary`
   LIMIT 1) AS s
 WHERE e.`emp_no` = t.`emp_no`

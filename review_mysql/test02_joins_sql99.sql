@@ -160,4 +160,173 @@ FROM
   OUTER JOIN dept_emp de
     ON d.`dept_no` = de.`dept_no`
     AND de.`to_date` = '9999-01-01');
+    
+# 练习：查询工资最高的在职经理所在的部门的工资最低的在职员工的姓名，职位，工资。
+ ## 1.查出所有的在职经理
+ SELECT
+  dm.`emp_no`,
+  dm.`dept_no`
+FROM
+  dept_manager dm WHERE dm.`to_date`='9999-01-01';
+  
+## 2.查出1中的经理中工资最高的
+ SELECT
+  s.`emp_no`,
+  s.`salary`
+FROM
+  salaries s
+WHERE s.`emp_no` IN
+  (SELECT
+    dm.`emp_no`
+  FROM
+    dept_manager dm
+  WHERE dm.`to_date` = '9999-01-01')
+ORDER BY s.`salary` DESC
+LIMIT 1;
+
+## 3.查出2中的经理所在的部门
+ SELECT
+  dm.`dept_no`
+FROM
+  dept_manager dm
+WHERE dm.`emp_no` IN
+  (SELECT
+    t.`emp_no`
+  FROM
+    (SELECT
+      s.`emp_no`,
+      s.`salary`
+    FROM
+      salaries s
+    WHERE s.`emp_no` IN
+      (SELECT
+        dm.`emp_no`
+      FROM
+        dept_manager dm
+      WHERE dm.`to_date` = '9999-01-01')
+    ORDER BY s.`salary` DESC
+    LIMIT 1) AS t);
+
+## 4.查出3中部门的所有在职员工
+ SELECT
+  de.`emp_no`
+FROM
+  dept_emp de
+WHERE de.`dept_no` IN
+  (SELECT
+    dm.`dept_no`
+  FROM
+    dept_manager dm
+  WHERE dm.`emp_no` IN
+    (SELECT
+      t.`emp_no`
+    FROM
+      (SELECT
+        s.`emp_no`,
+        s.`salary`
+      FROM
+        salaries s
+      WHERE s.`emp_no` IN
+        (SELECT
+          dm.`emp_no`
+        FROM
+          dept_manager dm
+        WHERE dm.`to_date` = '9999-01-01')
+      ORDER BY s.`salary` DESC
+      LIMIT 1) AS t)) AND de.`to_date`='9999-01-01';
+      
+## 5.查询4中所有员工的工资最低的员工号
+ SELECT
+  s.`emp_no`,
+  s.`salary`
+FROM
+  salaries s
+WHERE s.`emp_no` IN
+  (SELECT
+    de.`emp_no`
+  FROM
+    dept_emp de
+  WHERE de.`dept_no` IN
+    (SELECT
+      dm.`dept_no`
+    FROM
+      dept_manager dm
+    WHERE dm.`emp_no` IN
+      (SELECT
+        t.`emp_no`
+      FROM
+        (SELECT
+          s.`emp_no`,
+          s.`salary`
+        FROM
+          salaries s
+        WHERE s.`emp_no` IN
+          (SELECT
+            dm.`emp_no`
+          FROM
+            dept_manager dm
+          WHERE dm.`to_date` = '9999-01-01')
+          AND s.`to_date` = '9999-01-01'
+        ORDER BY s.`salary` DESC
+        LIMIT 1) AS t))
+    AND de.`to_date` = '9999-01-01')
+  AND s.`to_date` = '9999-01-01'
+ORDER BY s.`salary`
+LIMIT 1;
+
+      
+## 6.查询5中的员工所需信息
+ SELECT
+  e.`emp_no`,
+  CONCAT(
+    e.`first_name`,
+    ' ',
+    e.`last_name`
+  ) AS 'name',
+  p.`salary`,
+  t.`title`
+FROM
+  employees e
+  JOIN titles t
+    ON e.`emp_no` = t.`emp_no`
+    AND t.`to_date` = '9999-01-01'
+  JOIN
+    (SELECT
+  s.`emp_no`,
+  s.`salary`
+FROM
+  salaries s
+WHERE s.`emp_no` IN
+  (SELECT
+    de.`emp_no`
+  FROM
+    dept_emp de
+  WHERE de.`dept_no` IN
+    (SELECT
+      dm.`dept_no`
+    FROM
+      dept_manager dm
+    WHERE dm.`emp_no` IN
+      (SELECT
+        t.`emp_no`
+      FROM
+        (SELECT
+          s.`emp_no`,
+          s.`salary`
+        FROM
+          salaries s
+        WHERE s.`emp_no` IN
+          (SELECT
+            dm.`emp_no`
+          FROM
+            dept_manager dm
+          WHERE dm.`to_date` = '9999-01-01')
+          AND s.`to_date` = '9999-01-01'
+        ORDER BY s.`salary` DESC
+        LIMIT 1) AS t))
+    AND de.`to_date` = '9999-01-01')
+  AND s.`to_date` = '9999-01-01'
+ORDER BY s.`salary`
+LIMIT 1) AS p
+    ON p.`emp_no` = e.`emp_no`;
 
